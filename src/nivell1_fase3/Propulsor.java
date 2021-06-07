@@ -18,25 +18,31 @@ public class Propulsor implements Runnable{
 	public void run() {
 		
 		if(cohete.isAcelerando()) {
-			System.err.println("ACELERANDO!");
+			System.err.println("ACELERANDO PROPULSOR " + idPropulsor + " DEL COHETE "+cohete.getIdCodigo() +"!");
 		for(int i=potenciaActual; i<=potenciaMaxima;i++) {
 			if(!cohete.isAcelerando()) break;
 			potenciaActual=i;
 			System.out.println("Potencia del propulsor nº: " +idPropulsor + " del Cohete -> " + cohete.getIdCodigo() + ": " + potenciaActual + " kW / " + potenciaMaxima + " kW");
+			
+			if(potenciaActual==potenciaMaxima) System.err.println("\nPROPULSOR " + idPropulsor + " DEL COHETE " + cohete.getIdCodigo() +" HA ALCANZADO LA POTENCIA MÁXIMA\n");
+			
 			try {
-				Thread.sleep(200);
+				Thread.sleep(400);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 				}
 			}
 		}else {
-			System.err.println("FRENANDO!");
+			System.err.println("FRENANDO PROPULSOR " + idPropulsor + "DEL COHETE "+cohete.getIdCodigo() +"!");
 			for(int i=potenciaActual; i>=0;i--) {
 				if(cohete.isAcelerando()) break;
 				potenciaActual=i;
 				System.err.println("Potencia del propulsor nº : " +idPropulsor + " del Cohete -> " + cohete.getIdCodigo() + ": " + potenciaActual + " kW / " + potenciaMaxima + " kW");
+				
+				if(potenciaActual==0) System.err.println("\nPROPULSOR " + idPropulsor + " DEL COHETE " + cohete.getIdCodigo() +" ESTÁ DETENIDO (POTENCIA ACTUAL -> 0)\n");
+				
 				try {
-					Thread.sleep(200);
+					Thread.sleep(400);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
